@@ -61,7 +61,8 @@ def review_encode(s):
 
 	return encoded
 
-with open("test.txt", encoding="utf-8") as f:
+
+with open("test3.txt", encoding="utf-8") as f:
 	for line in f.readlines():
 		nline = line.replace(",", "").replace(".", "").replace("(", "").replace(")", "").replace(":", "").replace("\"","").strip().split(" ")
 		encode = review_encode(nline)

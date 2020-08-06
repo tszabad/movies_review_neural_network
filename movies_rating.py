@@ -61,17 +61,20 @@ def review_encode(s):
 
 	return encoded
 
-
-with open("test3.txt", encoding="utf-8") as f:
-	for line in f.readlines():
-		nline = line.replace(",", "").replace(".", "").replace("(", "").replace(")", "").replace(":", "").replace("\"","").strip().split(" ")
-		encode = review_encode(nline)
-		encode = keras.preprocessing.sequence.pad_sequences([encode], value=word_index["<PAD>"], padding="post", maxlen=250) 
-		predict = model.predict(encode)
-		print(line)
-		print(encode)
-		print(predict[0])
-
+review_file=input("Enter the file name:")
+try:
+	with open(review_file, encoding="utf-8") as f:
+		for line in f.readlines():
+			nline = line.replace(",", "").replace(".", "").replace("(", "").replace(")", "").replace(":", "").replace("\"","").strip().split(" ")
+			encode = review_encode(nline)
+			encode = keras.preprocessing.sequence.pad_sequences([encode], value=word_index["<PAD>"], padding="post", maxlen=250) 
+			predict = model.predict(encode)
+			print(line)
+			print(encode)
+			print(predict[0])
+except:
+	print("Incorrect file name", review_file)
+	quit()
 '''
 test_review= test_data[0]
 predict = model.predict([test_review])
